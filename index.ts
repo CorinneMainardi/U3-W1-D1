@@ -21,8 +21,11 @@ class User implements Smartphone {
     console.log(`credito residuo: ${this.credito}`);
   }
   chiamata(minuti: number) {
-    (this.credito = minuti * 0), 20;
-    console.log(`credito residuo: ${this.credito}`);
+    if (this.credito - minuti * 0.2 < 0) {
+      console.log("impossibile effettuare la chiamata");
+    }
+    this.credito -= minuti * 0.2;
+    this.numeroChiamate += 1;
   }
   chiama404() {
     return this.credito;
@@ -30,14 +33,7 @@ class User implements Smartphone {
   getNumeroChiamata() {
     return this.numeroChiamate;
   }
-  azzeraChiamate() {
-    return (this.numeroChiamate = 0);
-  }
-  creditonegativo() {
-    if (this.credito > 0) {
-      console.log("puoi effettuare la chiamata");
-    } else {
-      console.log("non puoi effettuare la chiamata");
-    }
+  azzeraChiamate(): void {
+    this.numeroChiamate = 0;
   }
 }
